@@ -24,9 +24,9 @@ import org.mini2Dx.core.graphics.Texture;
 class Paddle {
     public Score score;
     public static float PADDLE_ACCELERATION = 350;
-    public static final String PADDLE_TEXTURE_IMAGE = "misc/paddle.png";
+    public static String PADDLE_TEXTURE_IMAGE = "misc/paddle.png";
     private final CollisionBox collisionBox;
-    private final Sprite paddleSprite;
+    private Sprite paddleSprite;
 
     public Paddle(){
         Texture paddleTexture = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
@@ -47,11 +47,22 @@ class Paddle {
 
     public void update(float delta) {
         collisionBox.preUpdate();
+
         if(ScoreCounter.getInstance().getScore() >= 500 && ScoreCounter.getInstance().getScore() <= 1000)
         {
             PADDLE_ACCELERATION = 280;
+            PADDLE_TEXTURE_IMAGE = "misc/paddle2.png";
+            Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
+            paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
+            collisionBox.setWidth(paddleSprite.getWidth());
+            collisionBox.setHeight(paddleSprite.getHeight());
         }
         else{
+            PADDLE_TEXTURE_IMAGE = "misc/paddle.png";
+            Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
+            paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
+            collisionBox.setWidth(paddleSprite.getWidth());
+            collisionBox.setHeight(paddleSprite.getHeight());
             PADDLE_ACCELERATION = 350;
         }
         InputHandler iH = InputHandler.getInstance();
