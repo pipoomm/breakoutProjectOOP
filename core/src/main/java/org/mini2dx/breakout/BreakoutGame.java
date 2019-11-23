@@ -17,6 +17,7 @@ package org.mini2dx.breakout;
 
 import org.mini2Dx.core.Mdx;
 import org.mini2Dx.core.assets.AssetManager;
+import org.mini2Dx.core.audio.Sound;
 import org.mini2Dx.core.files.FallbackFileHandleResolver;
 import org.mini2Dx.core.files.FileHandleResolver;
 import org.mini2Dx.core.files.InternalFileHandleResolver;
@@ -43,6 +44,10 @@ import java.util.Objects;
 
 public class BreakoutGame extends BasicGameScreen {
     public static final int ID = 2;
+    public int temp = 0;
+    public int soundItem = 0;
+    public int extTemp = 0;
+
 
     public static final int DEBUG_INPUT = 1, DEBUG_COLLISION_DRAW_COLLISION_BOXES = 2, DEBUG_COLLISION_PRINT = 4, DEBUG_BALL_SPEEDUP = 8;
     public static final int DEBUG_MODE = 0;
@@ -52,6 +57,37 @@ public class BreakoutGame extends BasicGameScreen {
 
     private static final String GAME_OVER_STRING = "GAME OVER!";
     private static final String UI_ASK_NAME_LAYOUT_XML = "ui/askname_ui.xml";
+
+    private static Sound backgroundOGG;
+    private final static float backgroundOGGVolume = 0.2f;
+
+    private static Sound winOGG;
+    private final static float winOGGVolume = 0.5f;
+
+    private static Sound loseOGG;
+    private final static float loseOGGVolume = 0.5f;
+
+    private static Sound dieOGG;
+    private final static float dieOGGVolume = 0.5f;
+
+    private static Sound itemOGG;
+    private final static float itemOGGVolume = 0.5f;
+
+    private static Sound bossOGG;
+    private final static float bossOGGVolume = 0.5f;
+
+    static {
+        try {
+            backgroundOGG = Mdx.audio.newSound(Mdx.files.internal("audio/03ChibiNinja.ogg"));
+            winOGG = Mdx.audio.newSound(Mdx.files.internal("audio/8bit-ME_Victory01.ogg"));
+            loseOGG = Mdx.audio.newSound(Mdx.files.internal("audio/8bit-GAG_loop.ogg"));
+            dieOGG = Mdx.audio.newSound(Mdx.files.internal("audio/cancel-01.wav"));
+            itemOGG = Mdx.audio.newSound(Mdx.files.internal("audio/item-01.wav"));
+            bossOGG = Mdx.audio.newSound(Mdx.files.internal("audio/8bit-act08_boss01.mp3"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private static final Brick.Color[] brickColors = {Brick.Color.RED, Brick.Color.PURPLE, Brick.Color.BLUE, Brick.Color.GREEN, Brick.Color.YELLOW, Brick.Color.GREY};
     private GameState gameState;
@@ -92,6 +128,7 @@ public class BreakoutGame extends BasicGameScreen {
     private final FontGlyphLayout glyphLayout = Mdx.fonts.defaultFont().newGlyphLayout();
 
     public void initialiseGame() {
+        backgroundOGG.loop(backgroundOGGVolume);
         gameState = GameState.RUNNING;
         paddle = new Paddle();
         ball = new Ball();
@@ -108,6 +145,7 @@ public class BreakoutGame extends BasicGameScreen {
         InputHandler.update();
         switch (gameState) {
             case RUNNING:
+
                 if (InputHandler.getInstance().isQuitPressed()) {
                     gameState = GameState.EXITING;
                 } else if (InputHandler.getInstance().isRestartPressed()) {
@@ -117,9 +155,22 @@ public class BreakoutGame extends BasicGameScreen {
                     initialiseBricks();
                     ball.returnToDefaultPosition();
                 }
+                if (CollisionHandler.getInstance().getAliveBricks() == 30 && extTemp ==0) {
+                    bossOGG.play(bossOGGVolume);
+                    backgroundOGG.stop();
+                    extTemp =1;
+                }
+                if (CollisionHandler.getInstance().getAliveBricks() == 24 && extTemp ==1) {
+                    bossOGG.stop();
+                    backgroundOGG.loop(backgroundOGGVolume);
+                    extTemp =0;
+                }
                 if (lives.isDead()) {
+                    backgroundOGG.stop();
+                    loseOGG.play(loseOGGVolume);
                     gameState = GameState.ENDING_GAME;
                 } else {
+
                     paddle.update(delta);
                     CollisionHandler.update();
                     ball.update(delta);
@@ -128,9 +179,85 @@ public class BreakoutGame extends BasicGameScreen {
                             bricks[i][j].update();
 
                     score.update();
+                    if(ScoreCounter.getInstance().getScore() >= 500 && soundItem == 0)
+                    {
+                        System.out.println("Played");
+                        itemOGG.play(itemOGGVolume);
+                        soundItem = 1;
+                    }
+                    else if(ScoreCounter.getInstance().getScore() >= 2500 && soundItem == 1)
+                    {
+                        System.out.println("Played");
+                        itemOGG.play(itemOGGVolume);
+                        soundItem =2;
+                    }
+                    else if(ScoreCounter.getInstance().getScore() >= 4000 && soundItem == 2)
+                    {
+                        System.out.println("Played");
+                        itemOGG.play(itemOGGVolume);
+                        soundItem =3;
+                    }
+                    else if(ScoreCounter.getInstance().getScore() >= 4800 && soundItem == 3)
+                    {
+                        System.out.println("Played");
+                        //itemOGG.play(itemOGGVolume);
+                        soundItem = 4;
+                    }
+                    else if(ScoreCounter.getInstance().getScore() >= 6000 && soundItem == 4)
+                    {
+                        System.out.println("Played");
+                        itemOGG.play(itemOGGVolume);
+                        soundItem = 5;
+                    }
+                    else if(ScoreCounter.getInstance().getScore() >= 7500 && soundItem == 5)
+                    {
+                        System.out.println("Played");
+                        itemOGG.play(itemOGGVolume);
+                        soundItem = 6;
+                    }
+                    else if(ScoreCounter.getInstance().getScore() >= 8600 && soundItem == 6)
+                    {
+                       // System.out.println("Played");
+                       // itemOGG.play(itemOGGVolume);
+                        soundItem = 7;
+                    }
+                    else if(ScoreCounter.getInstance().getScore() >= 10000 && soundItem == 7)
+                    {
+                        System.out.println("Played");
+                        itemOGG.play(itemOGGVolume);
+                        soundItem = 8;
+                    }
+                    else if(ScoreCounter.getInstance().getScore() >= 13000 && soundItem == 8)
+                    {
+                        System.out.println("Played");
+                        itemOGG.play(itemOGGVolume);
+                        soundItem = 9;
+                    }
+                    else if(ScoreCounter.getInstance().getScore() >= 14000 && soundItem == 9)
+                    {
+                        //System.out.println("Played");
+                        //itemOGG.play(itemOGGVolume);
+                        soundItem = 10;
+                    }
+                    else if(ScoreCounter.getInstance().getScore() >= 20000 && soundItem == 10)
+                    {
+                        System.out.println("Played");
+                        itemOGG.play(itemOGGVolume);
+                        soundItem = 11;
+                    }
+
+                    else if(ScoreCounter.getInstance().getScore() >= 25000 && soundItem == 11)
+                    {
+                        System.out.println("Played");
+                        itemOGG.play(itemOGGVolume);
+                        soundItem = 12;
+                    }
+
+
                     if (ball.getCollisionBox().getY() > gameHeight) {
                         lives.decrease();
                         if (!lives.isDead())
+                            dieOGG.play(dieOGGVolume);
                             ball.returnToDefaultPosition();
                     }
                 }
@@ -192,10 +319,20 @@ public class BreakoutGame extends BasicGameScreen {
 
     private void initialiseBricks() {
         for (int j = 0; j < gridSizeY; j++)
+        {
             for (int i = 0; i < gridSizeX; i++)
+            {
                 bricks[i][j] = new Brick(brickColors[j], i * Brick.width, j * Brick.height);
+            }
+        }
+        temp++;
+
 
         CollisionHandler.getInstance().setBricks(bricks);
+        if(temp != 1)
+        {
+        winOGG.play(winOGGVolume);
+        }
     }
 
     @Override

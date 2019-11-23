@@ -41,6 +41,7 @@ public class Ball {
     private static Sound paddleCollisionSound;
     private final static float paddleCollisionSoundVolume = 0.5f;
 
+
     static {
         try {
             wallCollisionSound = Mdx.audio.newSound(Mdx.files.internal("audio/wall.ogg"));
@@ -71,21 +72,26 @@ public class Ball {
 
     public void update(float delta) {
         collisionBox.preUpdate();
-        if(ScoreCounter.getInstance().getScore() >= 500)//&& ScoreCounter.getInstance().getScore() <= 1000)
+        if(CollisionHandler.getInstance().getAliveBricks() == 40)
         {
-            acceleration = 400;
+            acceleration = (float) (acceleration + 0.05);
         }
-        if(ScoreCounter.getInstance().getScore() >= 1000)//&& ScoreCounter.getInstance().getScore() <= 1000)
+        else if(CollisionHandler.getInstance().getAliveBricks() == 30)
         {
-            acceleration = 420;
+            acceleration = (float) (acceleration + 0.05);
         }
-        if(ScoreCounter.getInstance().getScore() >= 2000)//&& ScoreCounter.getInstance().getScore() <= 1000)
+        else if(CollisionHandler.getInstance().getAliveBricks() == 20 )
         {
-            acceleration = 450;
+            acceleration = (float) (acceleration + 0.05);
         }
-        else{
-            acceleration = 300;
+        else if(CollisionHandler.getInstance().getAliveBricks() == 10)
+        {
+            acceleration = (float) (acceleration + 0.05);
         }
+//        else {
+//            acceleration = 300;
+//        }
+        //System.out.println(acceleration);
         if (collisionBox.getX() + collisionBox.getWidth() > BreakoutGame.gameWidth || collisionBox.getX() <= 0) { //lateral wall collision
             horizontalMovementSign *= -1;
             wallCollisionSound.play(wallCollisionSoundVolume);

@@ -17,15 +17,24 @@ package org.mini2dx.breakout;
 
 import org.mini2Dx.core.Graphics;
 import org.mini2Dx.core.Mdx;
+import org.mini2Dx.core.audio.Sound;
 import org.mini2Dx.core.graphics.Texture;
 
-    public class Background {
+import java.io.IOException;
+
+public class Background {
        // private final static int BACKGROUND_SCALE = 1;
 
     private final Texture backgroundTexture = Mdx.graphics.newTexture(Mdx.files.internal("misc/background.png"));
+    private final Texture cheer = Mdx.graphics.newTexture(Mdx.files.internal("misc/ball2.png"));
+
+
 
     public void render(Graphics g) {
         g.drawTexture(backgroundTexture,0,0);
+        if (CollisionHandler.getInstance().getAliveBricks() == 54) {
+            g.drawTexture(cheer,200,200);
+        }
         //for (int x = 0; x < BreakoutGame.gameWidth; x += backgroundTexture.getWidth() / BACKGROUND_SCALE)
         //    for (int y = 0; y < BreakoutGame.gameHeight; y += backgroundTexture.getHeight() / BACKGROUND_SCALE)
         //        g.drawTexture(backgroundTexture, x, y, backgroundTexture.getWidth() / BACKGROUND_SCALE, backgroundTexture.getHeight() / BACKGROUND_SCALE);

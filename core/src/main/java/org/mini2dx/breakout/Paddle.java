@@ -17,14 +17,16 @@ package org.mini2dx.breakout;
 
 import org.mini2Dx.core.Graphics;
 import org.mini2Dx.core.Mdx;
+import org.mini2Dx.core.audio.Sound;
 import org.mini2Dx.core.collision.CollisionBox;
 import org.mini2Dx.core.graphics.Sprite;
 import org.mini2Dx.core.graphics.Texture;
 
+import java.io.IOException;
+
 class Paddle {
-    public Score score;
     public static float PADDLE_ACCELERATION = 350;
-    public static String PADDLE_TEXTURE_IMAGE = "misc/paddle.png";
+    public String PADDLE_TEXTURE_IMAGE = "misc/paddle.png";
     private final CollisionBox collisionBox;
     private Sprite paddleSprite;
 
@@ -34,8 +36,6 @@ class Paddle {
         collisionBox = new CollisionBox();
         collisionBox.setWidth(paddleSprite.getWidth());
         collisionBox.setHeight(paddleSprite.getHeight());
-
-
 
         returnToDefaultPosition();
     }
@@ -50,21 +50,94 @@ class Paddle {
 
         if(ScoreCounter.getInstance().getScore() >= 500 && ScoreCounter.getInstance().getScore() <= 1000)
         {
-            PADDLE_ACCELERATION = 280;
             PADDLE_TEXTURE_IMAGE = "misc/paddle2.png";
             Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
             paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
             collisionBox.setWidth(paddleSprite.getWidth());
             collisionBox.setHeight(paddleSprite.getHeight());
         }
-        else{
+
+        else if(ScoreCounter.getInstance().getScore() >= 2500 && ScoreCounter.getInstance().getScore() <= 3700)
+        {
+            PADDLE_TEXTURE_IMAGE = "misc/paddle2.png";
+            Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
+            paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
+            collisionBox.setWidth(paddleSprite.getWidth());
+            collisionBox.setHeight(paddleSprite.getHeight());
+        }
+
+        else if(ScoreCounter.getInstance().getScore() >= 4000 && ScoreCounter.getInstance().getScore() <= 4600)
+        {
+            PADDLE_TEXTURE_IMAGE = "misc/paddle2.png";
+            Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
+            paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
+            collisionBox.setWidth(paddleSprite.getWidth());
+            collisionBox.setHeight(paddleSprite.getHeight());
+        }
+
+        else if(ScoreCounter.getInstance().getScore() >= 6000 && ScoreCounter.getInstance().getScore() <= 6500)
+        {
+            PADDLE_TEXTURE_IMAGE = "misc/paddle2.png";
+            Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
+            paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
+            collisionBox.setWidth(paddleSprite.getWidth());
+            collisionBox.setHeight(paddleSprite.getHeight());
+        }
+
+        else if(ScoreCounter.getInstance().getScore() >= 7500 && ScoreCounter.getInstance().getScore() <= 8000)
+        {
+            PADDLE_TEXTURE_IMAGE = "misc/paddle2.png";
+            Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
+            paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
+            collisionBox.setWidth(paddleSprite.getWidth());
+            collisionBox.setHeight(paddleSprite.getHeight());
+        }
+
+        else if(ScoreCounter.getInstance().getScore() >= 10000 && ScoreCounter.getInstance().getScore() <= 11000)
+        {
+            PADDLE_TEXTURE_IMAGE = "misc/paddle2.png";
+            Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
+            paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
+            collisionBox.setWidth(paddleSprite.getWidth());
+            collisionBox.setHeight(paddleSprite.getHeight());
+        }
+
+        else if(ScoreCounter.getInstance().getScore() >= 13000 && ScoreCounter.getInstance().getScore() <= 13500)
+        {
+            PADDLE_TEXTURE_IMAGE = "misc/paddle2.png";
+            Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
+            paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
+            collisionBox.setWidth(paddleSprite.getWidth());
+            collisionBox.setHeight(paddleSprite.getHeight());
+        }
+
+        else if(ScoreCounter.getInstance().getScore() >= 20000 && ScoreCounter.getInstance().getScore() <= 21000)
+        {
+            PADDLE_TEXTURE_IMAGE = "misc/paddle2.png";
+            Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
+            paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
+            collisionBox.setWidth(paddleSprite.getWidth());
+            collisionBox.setHeight(paddleSprite.getHeight());
+        }
+
+        else if(ScoreCounter.getInstance().getScore() >= 25000 && ScoreCounter.getInstance().getScore() <= 26500)
+        {
+            PADDLE_TEXTURE_IMAGE = "misc/paddle2.png";
+            Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
+            paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
+            collisionBox.setWidth(paddleSprite.getWidth());
+            collisionBox.setHeight(paddleSprite.getHeight());
+        }
+
+        else
+        {
             PADDLE_TEXTURE_IMAGE = "misc/paddle.png";
             Texture paddleTexture2 = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
             paddleSprite = Mdx.graphics.newSprite(paddleTexture2);
             collisionBox.setWidth(paddleSprite.getWidth());
             collisionBox.setHeight(paddleSprite.getHeight());
-            PADDLE_ACCELERATION = 350;
         }
+
         InputHandler iH = InputHandler.getInstance();
         if (iH.isLeftPressed()) {
             collisionBox.setX(Math.max(collisionBox.getX() - PADDLE_ACCELERATION * delta, 0));
@@ -72,6 +145,13 @@ class Paddle {
         if (iH.isRightPressed()){
             float newX = collisionBox.getX() + PADDLE_ACCELERATION * delta;
             collisionBox.setX(newX + collisionBox.getWidth() < BreakoutGame.gameWidth ? newX : BreakoutGame.gameWidth - collisionBox.getWidth());
+        }
+
+        if (CollisionHandler.getInstance().getAliveBricks() <= 30 && CollisionHandler.getInstance().getAliveBricks() >= 25) {
+            PADDLE_ACCELERATION = 200;
+        }
+        else{
+            PADDLE_ACCELERATION = 350;
         }
     }
 
@@ -84,4 +164,5 @@ class Paddle {
     public CollisionBox getCollisionBox() {
         return collisionBox;
     }
+
 }
