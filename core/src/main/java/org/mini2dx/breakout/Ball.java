@@ -46,7 +46,7 @@ public class Ball {
         try {
             wallCollisionSound = Mdx.audio.newSound(Mdx.files.internal("audio/wall.ogg"));
             brickCollisionSound = Mdx.audio.newSound(Mdx.files.internal("audio/brick.ogg"));
-            paddleCollisionSound = Mdx.audio.newSound(Mdx.files.internal("audio/b-br.ogg"));
+            paddleCollisionSound = Mdx.audio.newSound(Mdx.files.internal("audio/269718__michorvath__ping-pong-ball-hit.wav"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -26,14 +26,42 @@ public class Background {
        // private final static int BACKGROUND_SCALE = 1;
 
     private final Texture backgroundTexture = Mdx.graphics.newTexture(Mdx.files.internal("misc/background.png"));
-    private final Texture cheer = Mdx.graphics.newTexture(Mdx.files.internal("misc/ball2.png"));
+    private final Texture cheer = Mdx.graphics.newTexture(Mdx.files.internal("misc/ok.png"));
+    private final Texture cheer2 = Mdx.graphics.newTexture(Mdx.files.internal("misc/ok2.png"));
 
 
 
     public void render(Graphics g) {
         g.drawTexture(backgroundTexture,0,0);
-        if (CollisionHandler.getInstance().getAliveBricks() == 54) {
-            g.drawTexture(cheer,200,200);
+        if (CollisionHandler.getInstance().getAliveBricks() == 10) {
+            g.drawTexture(cheer,15,400);
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() == 9) {
+            g.drawTexture(cheer2,15,400);
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() == 8) {
+            g.drawTexture(cheer,15,400);
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() == 7) {
+            g.drawTexture(cheer2,15,400);
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() == 6) {
+            g.drawTexture(cheer,15,400);
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() == 5) {
+            g.drawTexture(cheer2,15,400);
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() == 4) {
+            g.drawTexture(cheer,15,400);
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() == 3) {
+            g.drawTexture(cheer2,15,400);
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() == 2) {
+            g.drawTexture(cheer,15,400);
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() == 1) {
+            g.drawTexture(cheer2,15,400);
         }
         //for (int x = 0; x < BreakoutGame.gameWidth; x += backgroundTexture.getWidth() / BACKGROUND_SCALE)
         //    for (int y = 0; y < BreakoutGame.gameHeight; y += backgroundTexture.getHeight() / BACKGROUND_SCALE)

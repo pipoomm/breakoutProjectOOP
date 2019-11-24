@@ -148,7 +148,13 @@ class Paddle {
         }
 
         if (CollisionHandler.getInstance().getAliveBricks() <= 30 && CollisionHandler.getInstance().getAliveBricks() >= 25) {
-            PADDLE_ACCELERATION = 200;
+            PADDLE_ACCELERATION = 180;
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() <= 40 && CollisionHandler.getInstance().getAliveBricks() >= 30 && ScoreCounter.getInstance().getScore() >= 10000) {
+            PADDLE_ACCELERATION = 160;
+        }
+        if (CollisionHandler.getInstance().getAliveBricks() <= 20 && CollisionHandler.getInstance().getAliveBricks() >= 10 && ScoreCounter.getInstance().getScore() >= 15000) {
+            PADDLE_ACCELERATION = 150;
         }
         else{
             PADDLE_ACCELERATION = 350;

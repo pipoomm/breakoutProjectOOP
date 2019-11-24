@@ -59,7 +59,7 @@ public class BreakoutGame extends BasicGameScreen {
     private static final String UI_ASK_NAME_LAYOUT_XML = "ui/askname_ui.xml";
 
     private static Sound backgroundOGG;
-    private final static float backgroundOGGVolume = 0.2f;
+    private final static float backgroundOGGVolume = 0.05f;
 
     private static Sound winOGG;
     private final static float winOGGVolume = 0.5f;
