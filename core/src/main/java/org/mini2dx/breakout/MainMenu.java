@@ -39,7 +39,9 @@ import org.mini2Dx.ui.style.UiTheme;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * User interface for user interact when start game to navigate to other scene
+ */
 public class MainMenu extends BasicGameScreen {
     public final static int ID = 1;
     public static final String UI_MAINMENU_LAYOUT_XML = "ui/mainmenu_ui.xml";
@@ -50,6 +52,10 @@ public class MainMenu extends BasicGameScreen {
     private Viewport viewport;
     private int screenToLoad = 0;
 
+    /**
+     * Initialises the game screen menu
+     * @param gc The {@link GameContainer} of the game
+     */
     @Override
     public void initialise(GameContainer gc) {
         FileHandleResolver fileHandleResolver = new FallbackFileHandleResolver(new InternalFileHandleResolver(),
@@ -90,11 +96,19 @@ public class MainMenu extends BasicGameScreen {
         Container scoreContainer = (Container) leaderboardContainer.getElementById("scoreContainer");
 
         newGameButton.addActionListener(new ActionListener() {
+            /**
+             * Called when an action event begins
+             * @param event An {@link ActionEvent} instance containing the event details
+             */
             @Override
             public void onActionBegin(ActionEvent event) {
 
             }
 
+            /**
+             * Called when an action event ends
+             * @param event An {@link ActionEvent} instance containing the event details
+             */
             @Override
             public void onActionEnd(ActionEvent event) {
                 screenToLoad = BreakoutGame.ID;
@@ -102,11 +116,19 @@ public class MainMenu extends BasicGameScreen {
         });
 
         leaderboardButton.addActionListener(new ActionListener() {
+            /**
+             * Called when an action event begins
+             * @param event An {@link ActionEvent} instance containing the event details
+             */
             @Override
             public void onActionBegin(ActionEvent event) {
 
             }
 
+            /**
+             * Called when an action event ends
+             * @param event An {@link ActionEvent} instance containing the event details
+             */
             @Override
             public void onActionEnd(ActionEvent event) {
                 scoreContainer.removeAll();
@@ -153,11 +175,19 @@ public class MainMenu extends BasicGameScreen {
         });
 
         quitButton.addActionListener(new ActionListener() {
+            /**
+             * Called when an action event ends
+             * @param event An {@link ActionEvent} instance containing the event details
+             */
             @Override
             public void onActionBegin(ActionEvent event) {
 
             }
 
+            /**
+             * Called when an action event ends
+             * @param event An {@link ActionEvent} instance containing the event details
+             */
             @Override
             public void onActionEnd(ActionEvent event) {
                 Mdx.platformUtils.exit(false);
@@ -165,11 +195,19 @@ public class MainMenu extends BasicGameScreen {
         });
 
         mainMenuButton.addActionListener(new ActionListener() {
+            /**
+             * Called when an action event ends
+             * @param event An {@link ActionEvent} instance containing the event details
+             */
             @Override
             public void onActionBegin(ActionEvent event) {
 
             }
 
+            /**
+             * Called when an action event ends
+             * @param event An {@link ActionEvent} instance containing the event details
+             */
             @Override
             public void onActionEnd(ActionEvent event) {
                 uiContainer.remove(leaderboardContainer);
@@ -180,6 +218,12 @@ public class MainMenu extends BasicGameScreen {
         uiContainer.setViewport(viewport);
     }
 
+    /**
+     * Updates the game screen
+     * @param gc Parameter to get content object.
+     * @param screenManager For show menu when stage end
+     * @param delta The time in seconds since the last update
+     */
     @Override
     public void update(GameContainer gc, ScreenManager screenManager, float delta) {
         if (!assetManager.update()) {
@@ -196,12 +240,21 @@ public class MainMenu extends BasicGameScreen {
         Mdx.input.setInputProcessor(uiContainer);
     }
 
+    /**
+     * Renders the game screen
+     * @param gc The {@link GameContainer} of the game
+     * @param g The {@link Graphics} context available for rendering
+     */
     @Override
     public void render(GameContainer gc, Graphics g) {
         viewport.apply(g);
         uiContainer.render(g);
     }
 
+    /**
+     * Returns the identifier of the screen
+     * @return A unique identifier
+     */
     @Override
     public int getId() {
         return ID;

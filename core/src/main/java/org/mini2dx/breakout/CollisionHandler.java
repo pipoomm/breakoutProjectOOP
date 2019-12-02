@@ -17,7 +17,9 @@ package org.mini2dx.breakout;
 
 import org.mini2Dx.core.collision.CollisionBox;
 import org.mini2Dx.core.geom.Rectangle;
-
+/**
+ * Collision happen in each object 
+ */
 public class CollisionHandler {
     private static final CollisionHandler current;
 
@@ -37,18 +39,32 @@ public class CollisionHandler {
     private CollisionHandler(){
     }
 
+    /**
+     * @return CollisionHandler
+     */
     public static CollisionHandler getInstance() {
         return current;
     }
 
+    /**
+     * Set collision for paddle
+     * @param paddle For paddle object
+     */
     public void setPaddle(Paddle paddle) {
         this.paddle = paddle;
     }
 
+    /**
+     * Set collision for ball
+     * @param ball For ball object
+     */
     public void setBall(Ball ball){
         this.ball = ball;
     }
 
+    /**
+     * Updates the game screen
+     */
     public static void update(){
         current.isBallTouchingPaddle = current.ball.getCollisionBox().intersects((Rectangle) current.paddle.getCollisionBox());
 
@@ -69,27 +85,50 @@ public class CollisionHandler {
         }
     }
 
+    /**
+     * Set collision area for bricks
+     * @param bricks collision of brick area
+     */
     public void setBricks(Brick[][] bricks) {
         this.bricks = bricks;
         aliveBricks = bricks.length * bricks[0].length;
     }
 
+    /**
+     * Check ball touched paddle
+     * @return TouchingPaddle or not
+     */
     public boolean isBallTouchingPaddle(){
         return isBallTouchingPaddle;
     }
 
+    /**
+     * Check ball touched to brick
+     * @return TouchingBrick or not
+     */
     public boolean isBallTouchingAnyBrick() {
         return isBallTouchingAnyBrick;
     }
 
+    /**
+     * Check brick that ball touched
+     * @return Brick that touched
+     */
     public Brick getTouchedBrick() {
         return touchedBrick;
     }
 
+    /**
+     * Get amount of brick left
+     * @return Amount of brick
+     */
     public int getAliveBricks() {
         return aliveBricks;
     }
 
+    /**
+     *Decrease brick amount when ball touched
+     */
     public void killBrick() {
         aliveBricks--;
     }

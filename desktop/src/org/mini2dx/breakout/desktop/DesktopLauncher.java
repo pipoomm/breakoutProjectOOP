@@ -4,7 +4,9 @@ import com.badlogic.gdx.backends.lwjgl.DesktopMini2DxGame;
 import org.mini2Dx.libgdx.desktop.DesktopMini2DxConfig;
 import org.mini2dx.breakout.BreakoutGame;
 import org.mini2dx.breakout.Startup;
-
+/**
+ * For launch the Breakout game screen
+ */
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		DesktopMini2DxConfig config = new DesktopMini2DxConfig(Startup.GAME_IDENTIFIER);

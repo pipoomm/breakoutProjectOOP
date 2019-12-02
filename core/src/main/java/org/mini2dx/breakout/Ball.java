@@ -23,7 +23,9 @@ import org.mini2Dx.core.graphics.Sprite;
 import org.mini2Dx.core.graphics.Texture;
 
 import java.io.IOException;
-
+/**
+ * Ball object in this game
+ */
 public class Ball {
     private final static String BALL_TEXTURE_IMAGE = "misc/ball.png";
 
@@ -55,6 +57,9 @@ public class Ball {
     private final float SPEEDUP_STEP = (Paddle.PADDLE_ACCELERATION - 50 - acceleration) / (BreakoutGame.gridSizeX * BreakoutGame.gridSizeY);
     //50 is a random number I chose as the minimum gap between the paddle speed and the ball speed
 
+    /**
+     * Build ball object into the game
+     */
     public Ball(){
         Texture ballTexture = Mdx.graphics.newTexture(Mdx.files.internal(BALL_TEXTURE_IMAGE));
         ballSprite = Mdx.graphics.newSprite(ballTexture);
@@ -65,11 +70,18 @@ public class Ball {
         returnToDefaultPosition();
     }
 
+    /**
+     * Direction of ball
+     */
     public void returnToDefaultPosition() {
         collisionBox.setCenter(BreakoutGame.gameWidth / 2, BreakoutGame.gameHeight * 3 / 4);
         verticalMovementSign = -1;
     }
 
+    /**
+     * Updates the ball acceleration
+     * @param delta The time in seconds since the last update
+     */
     public void update(float delta) {
         collisionBox.preUpdate();
         if(CollisionHandler.getInstance().getAliveBricks() == 40)
@@ -117,12 +129,20 @@ public class Ball {
         }
     }
 
+    /**
+     * Renders the ball screen
+     * @param g The {@link Graphics} context available for rendering
+     */
     public void render(Graphics g) {
         g.drawSprite(ballSprite, collisionBox.getRenderX(), collisionBox.getRenderY());
         if ((BreakoutGame.DEBUG_MODE & BreakoutGame.DEBUG_COLLISION_DRAW_COLLISION_BOXES) != 0)
             collisionBox.draw(g);
     }
 
+    /**
+     * Returns the area that make collision fir object in the game
+     * @return A collision area
+     */
     public CollisionBox getCollisionBox() {
         return collisionBox;
     }

@@ -23,13 +23,18 @@ import org.mini2Dx.core.graphics.Sprite;
 import org.mini2Dx.core.graphics.Texture;
 
 import java.io.IOException;
-
+/**
+ * Paddle object in this game
+ */
 class Paddle {
     public static float PADDLE_ACCELERATION = 350;
     public String PADDLE_TEXTURE_IMAGE = "misc/paddle.png";
     private final CollisionBox collisionBox;
     private Sprite paddleSprite;
 
+    /**
+     * Build paddle object into the game
+     */
     public Paddle(){
         Texture paddleTexture = Mdx.graphics.newTexture(Mdx.files.internal(PADDLE_TEXTURE_IMAGE));
         paddleSprite = Mdx.graphics.newSprite(paddleTexture);
@@ -40,11 +45,18 @@ class Paddle {
         returnToDefaultPosition();
     }
 
+    /**
+     * Direction of paddle can go
+     */
     public void returnToDefaultPosition(){
         collisionBox.setCenterX(BreakoutGame.gameWidth / 2);
         collisionBox.setY(BreakoutGame.gameHeight - paddleSprite.getHeight());
     }
 
+    /**
+     * Updates the paddle size
+     * @param delta The time in seconds since the last update
+     */
     public void update(float delta) {
         collisionBox.preUpdate();
 
@@ -148,25 +160,33 @@ class Paddle {
         }
 
         if (CollisionHandler.getInstance().getAliveBricks() <= 30 && CollisionHandler.getInstance().getAliveBricks() >= 25) {
-            PADDLE_ACCELERATION = 180;
+            PADDLE_ACCELERATION = 100;
         }
-        if (CollisionHandler.getInstance().getAliveBricks() <= 40 && CollisionHandler.getInstance().getAliveBricks() >= 30 && ScoreCounter.getInstance().getScore() >= 10000) {
-            PADDLE_ACCELERATION = 160;
+        else if (CollisionHandler.getInstance().getAliveBricks() <= 40 && CollisionHandler.getInstance().getAliveBricks() >= 30 && ScoreCounter.getInstance().getScore() >= 10000) {
+            PADDLE_ACCELERATION = 130;
         }
-        if (CollisionHandler.getInstance().getAliveBricks() <= 20 && CollisionHandler.getInstance().getAliveBricks() >= 10 && ScoreCounter.getInstance().getScore() >= 15000) {
-            PADDLE_ACCELERATION = 150;
+        else if (CollisionHandler.getInstance().getAliveBricks() <= 20 && CollisionHandler.getInstance().getAliveBricks() >= 10 && ScoreCounter.getInstance().getScore() >= 15000) {
+            PADDLE_ACCELERATION = 110;
         }
         else{
             PADDLE_ACCELERATION = 350;
         }
     }
 
+    /**
+     * Renders the paddle
+     * @param g The {@link Graphics} context available for rendering
+     */
     public void render(Graphics g) {
         g.drawSprite(paddleSprite, collisionBox.getRenderX(), collisionBox.getRenderY());
         if ((BreakoutGame.DEBUG_MODE & BreakoutGame.DEBUG_COLLISION_DRAW_COLLISION_BOXES) != 0)
             collisionBox.draw(g);
     }
 
+    /**
+     * Returns the area that make collision fir object in the game
+     * @return A collision area
+     */
     public CollisionBox getCollisionBox() {
         return collisionBox;
     }

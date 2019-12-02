@@ -41,7 +41,19 @@ import org.mini2Dx.ui.style.UiTheme;
 
 import java.io.IOException;
 import java.util.Objects;
-
+/**
+ * <h1>Breakout Game</h1>
+ * Breakout game implements an application from
+ * mini2DX engine.
+ * <p>
+ * In this game we added more effect and function for
+ * user friendly and make game more interesting.
+ *
+ *
+ * @author  610615011, 610615016, 610615020
+ * @version 1.0
+ * @since   2019-12-04
+ */
 public class BreakoutGame extends BasicGameScreen {
     public static final int ID = 2;
     public int temp = 0;
@@ -101,6 +113,11 @@ public class BreakoutGame extends BasicGameScreen {
     private LivesHandler lives;
     private UiContainer uiContainer;
 
+
+    /**
+     * This method is used to set initial game object for start scene.
+     * @param gameContainer Parameter to get content object.
+     */
     @Override
     public void initialise(GameContainer gameContainer) {
         //noinspection ConstantConditions
@@ -127,6 +144,10 @@ public class BreakoutGame extends BasicGameScreen {
 
     private final FontGlyphLayout glyphLayout = Mdx.fonts.defaultFont().newGlyphLayout();
 
+    /**
+     * Build the initial in each object component in this game
+     *
+     */
     public void initialiseGame() {
         backgroundOGG.loop(backgroundOGGVolume);
         gameState = GameState.RUNNING;
@@ -139,6 +160,12 @@ public class BreakoutGame extends BasicGameScreen {
         lives = new LivesHandler();
     }
 
+    /**
+     * Updates the game screen
+     * @param gameContainer Parameter to get content object.
+     * @param screenManager For show menu when stage end
+     * @param delta The time in seconds since the last update
+     */
     @Override
     public void update(GameContainer gameContainer, ScreenManager screenManager, float delta) {
 
@@ -283,11 +310,19 @@ public class BreakoutGame extends BasicGameScreen {
                 final Button confirmButton = (Button) askNameContainer.getElementById("confirmButton");
                 final TextBox playerNameText = (TextBox) askNameContainer.getElementById("playerNameText");
                 confirmButton.addActionListener(new ActionListener() {
+                    /**
+                     * Called when an action event begins (e.g. mouse down)
+                     * @param event An {@link ActionEvent} instance containing the event details
+                     */
                     @Override
                     public void onActionBegin(ActionEvent event) {
 
                     }
 
+                    /**
+                     * Called when an action event ends (e.g. mouse up)
+                     * @param event An {@link ActionEvent} instance containing the event details
+                     */
                     @Override
                     public void onActionEnd(ActionEvent event) {
                         LeaderboardHandler.getInstance().addScore(new Score(playerNameText.getValue(), ScoreCounter.getInstance().getScore()));
@@ -317,6 +352,9 @@ public class BreakoutGame extends BasicGameScreen {
         }
     }
 
+    /**
+     * Create brick object when start new game or level
+     */
     private void initialiseBricks() {
         for (int j = 0; j < gridSizeY; j++)
         {
@@ -335,6 +373,11 @@ public class BreakoutGame extends BasicGameScreen {
         }
     }
 
+    /**
+     * Renders the game screen
+     * @param gameContainer The {@link GameContainer} of the game
+     * @param g The {@link Graphics} context available for rendering
+     */
     @Override
     public void render(GameContainer gameContainer, Graphics g) {
         viewport.apply(g);
@@ -366,11 +409,18 @@ public class BreakoutGame extends BasicGameScreen {
         RESTARTED
     }
 
+    /**
+     * Returns the identifier of the screen
+     * @return A unique identifier
+     */
     @Override
     public int getId() {
         return ID;
     }
 
+    /**
+     * Create window screen breakout game
+     */
     public void drawCenterAlignedString(Graphics g, String s) {
         glyphLayout.setText(s);
         int renderX = Math.round((gameWidth / 2f) - (glyphLayout.getWidth() / 2f));

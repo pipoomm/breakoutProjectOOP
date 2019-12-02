@@ -16,7 +16,9 @@
 package org.mini2dx.breakout;
 
 import org.mini2Dx.core.serialization.annotation.Field;
-
+/**
+ * Score from user played in the game
+ */
 public class Score implements Comparable<Score> {
     @Field
     public String name;
@@ -29,11 +31,19 @@ public class Score implements Comparable<Score> {
 
     }
 
+    /**
+     * @param name Set name of who played
+     * @param score Set score can played
+     */
     public Score(String name, int score) {
         this.name = name;
         this.score = score;
     }
 
+    /**
+     * @param s Score for present player
+     * @return Score compared from 2 value
+     */
     @Override
     public int compareTo(Score s) {
         return Integer.compare(this.score, s.score);

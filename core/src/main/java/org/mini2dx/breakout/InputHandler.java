@@ -16,7 +16,9 @@
 package org.mini2dx.breakout;
 import org.mini2Dx.core.Mdx;
 import org.mini2Dx.gdx.Input;
-
+/**
+ * Get input from user interact
+ */
 class InputHandler {
     private boolean left, right, restart, quit, any;
     private static final InputHandler current;
@@ -29,6 +31,9 @@ class InputHandler {
 
     }
 
+    /**
+     * Updates the game screen when press key button
+     */
     public static void update(){
         current.left = Mdx.input.isKeyDown(Input.Keys.LEFT) || Mdx.input.isKeyDown(Input.Keys.DPAD_LEFT) || Mdx.input.isKeyDown(Input.Keys.A);
         current.right = Mdx.input.isKeyDown(Input.Keys.RIGHT) || Mdx.input.isKeyDown(Input.Keys.DPAD_RIGHT) || Mdx.input.isKeyDown(Input.Keys.D);
@@ -43,26 +48,45 @@ class InputHandler {
         }
     }
 
+
+    /**
+     * @return InputHandler
+     */
     public static InputHandler getInstance() {
         return current;
     }
 
+    /**
+     * @return left stage
+     */
     public boolean isLeftPressed() {
         return left;
     }
 
+    /**
+     * @return right stage
+     */
     public boolean isRightPressed() {
         return right;
     }
 
+    /**
+     * @return restart stage
+     */
     public boolean isRestartPressed() {
         return restart;
     }
 
+    /**
+     * @return quit stage
+     */
     public boolean isQuitPressed() {
         return quit;
     }
 
+    /**
+     * @return another key presses or not
+     */
     public boolean isAnyKeyPressed() {
         return any;
     }

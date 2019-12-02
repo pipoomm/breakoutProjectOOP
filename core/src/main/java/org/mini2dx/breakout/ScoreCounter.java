@@ -16,7 +16,9 @@
 package org.mini2dx.breakout;
 
 import org.mini2Dx.core.Graphics;
-
+/**
+ * Score counter in the game
+ */
 public class ScoreCounter {
     private static ScoreCounter current;
     private int score = 0;
@@ -27,10 +29,16 @@ public class ScoreCounter {
         current = this;
     }
 
+    /**
+     * @return ScoreCounter
+     */
     public static ScoreCounter getInstance() {
         return current;
     }
 
+    /**
+     * Set score by reference from live amount in that time
+     */
     public void update() {
         if (CollisionHandler.getInstance().isBallTouchingAnyBrick()) {
             //score += 100 * LivesHandler.getInstance().getLives() / LivesHandler.INITIAL_LIVES_NUM;
@@ -51,6 +59,10 @@ public class ScoreCounter {
         }
     }
 
+    /**
+     * Renders the score value
+     * @param g The {@link Graphics} context available for rendering
+     */
     public void render(Graphics g) {
         if (isScoreStringDirty) {
             scoreString = "Score: " + score;
@@ -59,6 +71,10 @@ public class ScoreCounter {
         g.drawString(scoreString, 4, 8);
     }
 
+    /**
+     * Returns the score value
+     * @return A score
+     */
     public int getScore() {
         return score;
     }

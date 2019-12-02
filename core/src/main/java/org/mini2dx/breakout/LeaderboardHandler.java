@@ -23,11 +23,12 @@ import org.mini2Dx.core.serialization.annotation.Field;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-
+/**
+ * Show and added username to leaderboard
+ */
 public class LeaderboardHandler {
 
     public final static int BEST_SCORES_TO_SAVE = 10;
-
     private final static String serializedFileName = "scoreboard.json";
     private static final LeaderboardHandler current;
 
@@ -46,14 +47,26 @@ public class LeaderboardHandler {
         current = temp_current;
     }
 
+    /**
+     * @return LeaderboardHandler
+     */
     public static LeaderboardHandler getInstance() {
         return current;
     }
 
+    /**
+     * Compare score to save in leaderboard
+     * @param score Score from user can play
+     * @return score will  be saved or not
+     */
     public boolean willBeInLeaderboard(int score) {
         return scores.size() < BEST_SCORES_TO_SAVE || score > scores.getLast().score;
     }
 
+    /**
+     * Add score to leaderboard
+     * @param newScore The {@link Score} of the game
+     */
     public void addScore(Score newScore) {
         scores.add(newScore);
 
@@ -66,6 +79,9 @@ public class LeaderboardHandler {
         writeToJson();
     }
 
+    /**
+     * Write the name of user to json file
+     */
     private void writeToJson() {
         try {
             Mdx.playerData.writeJson(this, serializedFileName);
@@ -75,6 +91,10 @@ public class LeaderboardHandler {
         }
     }
 
+    /**
+     * Get score from user
+     * @return scores from user who played
+     */
     public List<Score> getScores() {
         return scores;
     }
