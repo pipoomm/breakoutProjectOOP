@@ -310,19 +310,11 @@ public class BreakoutGame extends BasicGameScreen {
                 final Button confirmButton = (Button) askNameContainer.getElementById("confirmButton");
                 final TextBox playerNameText = (TextBox) askNameContainer.getElementById("playerNameText");
                 confirmButton.addActionListener(new ActionListener() {
-                    /**
-                     * Called when an action event begins (e.g. mouse down)
-                     * @param event An {@link ActionEvent} instance containing the event details
-                     */
                     @Override
                     public void onActionBegin(ActionEvent event) {
 
                     }
 
-                    /**
-                     * Called when an action event ends (e.g. mouse up)
-                     * @param event An {@link ActionEvent} instance containing the event details
-                     */
                     @Override
                     public void onActionEnd(ActionEvent event) {
                         LeaderboardHandler.getInstance().addScore(new Score(playerNameText.getValue(), ScoreCounter.getInstance().getScore()));

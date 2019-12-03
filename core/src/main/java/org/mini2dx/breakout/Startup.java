@@ -31,12 +31,7 @@ public class Startup extends ScreenBasedGame {
         addScreen(new BreakoutGame());
     }
 
-    /**
-     * Returns the identifier of the {@link GameScreen} that should be shown
-     * when the game starts
-     *
-     * @return The {@link GameScreen} identifier via {@link GameScreen}.getId()
-     */
+
     @Override
     public int getInitialScreenId() {
         return MainMenu.ID;

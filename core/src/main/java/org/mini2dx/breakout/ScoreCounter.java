@@ -48,11 +48,11 @@ public class ScoreCounter {
             }
             else if(LivesHandler.getInstance().getLives() == 2)
             {
-                score += 110;
+                score += 150;
             }
             else if(LivesHandler.getInstance().getLives() == 1)
             {
-                score += 120;
+                score += 200;
             }
 
             isScoreStringDirty = true;

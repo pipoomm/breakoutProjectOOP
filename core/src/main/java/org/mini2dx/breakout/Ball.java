@@ -84,7 +84,7 @@ public class Ball {
      */
     public void update(float delta) {
         collisionBox.preUpdate();
-        if(CollisionHandler.getInstance().getAliveBricks() == 40)
+/*        if(CollisionHandler.getInstance().getAliveBricks() == 40)
         {
             acceleration = (float) (acceleration + 0.05);
         }
@@ -99,11 +99,12 @@ public class Ball {
         else if(CollisionHandler.getInstance().getAliveBricks() == 10)
         {
             acceleration = (float) (acceleration + 0.05);
-        }
+        }*/
 //        else {
 //            acceleration = 300;
 //        }
         //System.out.println(acceleration);
+        acceleration = (float) (acceleration + 0.01);
         if (collisionBox.getX() + collisionBox.getWidth() > BreakoutGame.gameWidth || collisionBox.getX() <= 0) { //lateral wall collision
             horizontalMovementSign *= -1;
             wallCollisionSound.play(wallCollisionSoundVolume);
